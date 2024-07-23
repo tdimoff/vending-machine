@@ -64,14 +64,14 @@ Please note that the vending machine does not accept pennies ($0.01) or any othe
 2. Select the desired product(s).
 3. Press the "Buy" button when ready to make a purchase.
 4. Collect your item(s) and any change.
-5. If you want to cancel the transaction, press the "Return Change" button.
+5. If you want to cancel the transaction, press the "Reset" button.
 
 ## Note for Developers
 
 When implementing the vending machine logic, ensure that:
 
 1. Only the specified denominations are accepted.
-2. All prices and calculations are in dollars and cents.
+2. All prices and calculations are in USD and cents.
 3. The machine can provide change using the available denominations.
 4. The machine should not allow purchases if insufficient funds are inserted.
 5. Prices should be set in a way that can be paid with the available denominations and change can be given accordingly.
