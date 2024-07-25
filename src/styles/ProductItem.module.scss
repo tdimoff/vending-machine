@@ -1,0 +1,74 @@
+@import 'variables';
+
+.productItem {
+  height: 100%;
+
+  &__card {
+    border: 0.125rem solid transparent;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &--selected {
+      border-color: $primary-color;
+    }
+  }
+
+  &__mediaContainer {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  &__media {
+    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+  }
+
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    margin-bottom: 0.5rem;
+  }
+
+  &__price {
+    margin-top: auto;
+  }
+
+  &__stock {
+    margin-top: 0.5rem;
+  }
+
+  &__actions {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__quantityControl {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+
+    &--visible {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__selectButton {
+    margin-top: 0.5rem;
+  }
+}
