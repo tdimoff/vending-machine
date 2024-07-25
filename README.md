@@ -62,9 +62,10 @@ Please note that the vending machine does not accept pennies ($0.01) or any othe
 
 1. Insert money using the provided buttons for each denomination.
 2. Select the desired product(s).
-3. Press the "Buy" button when ready to make a purchase.
-4. Collect your item(s) and any change.
-5. If you want to cancel the transaction, press the "Reset" button.
+3. Adjust the quantity of each selected product using the incrementer (+) and decrementer (-) buttons.
+4. Press the "Buy" button when ready to make a purchase.
+5. Collect your item(s) and any change.
+6. If you want to cancel the transaction, press the "Reset" button.
 
 ## Note for Developers
 
