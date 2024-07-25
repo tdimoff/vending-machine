@@ -24,9 +24,6 @@ const VendingControls = ({
 
   return (
     <Box p={3}>
-      <Typography variant="h4" gutterBottom>
-        Balance: ${insertedMoney.toFixed(2)}
-      </Typography>
       {selectedProducts.length > 0 && (
         <Box mb={2}>
           <Typography variant="h5" gutterBottom>
@@ -34,42 +31,54 @@ const VendingControls = ({
           </Typography>
           {selectedProducts.map(({ product, quantity }) => (
             <Typography key={product.id} variant="body1">
-              {product.name} (x{quantity}) - ${(product.price * quantity).toFixed(2)}
+              {product.name} (x{quantity}) - $
+              {(product.price * quantity).toFixed(2)}
             </Typography>
           ))}
-          <Typography variant="h4" gutterBottom>
-            Total Price: ${totalPrice.toFixed(2)}
-          </Typography>
+          <Box mt={3}>
+            <Typography variant="h4" gutterBottom>
+              Total Price: ${totalPrice.toFixed(2)}
+            </Typography>
+          </Box>
         </Box>
       )}
-      {insertedMoney === 0.00 && (
-        <Typography variant="h4" gutterBottom>Please insert money:</Typography>
+      <Typography variant="h4" gutterBottom>
+        Balance: ${insertedMoney.toFixed(2)}
+      </Typography>
+      {insertedMoney === 0.0 && (
+        <Typography variant="h4" gutterBottom>
+          Please insert money:
+        </Typography>
       )}
       <CurrencyControls onInsertMoney={onInsertMoney} />
-      <Grid container spacing={2} sx={{ mt: 2 }}>
-        <Grid item xs={6}>
-          <Button
-            variant="contained"
-            color="secondary"
-            fullWidth
-            onClick={onPurchase}
-            disabled={selectedProducts.length === 0 || insertedMoney < totalPrice}
-          >
-            Buy
-          </Button>
+      <Box mt={2}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={onPurchase}
+              disabled={
+                selectedProducts.length === 0 || insertedMoney < totalPrice
+              }
+            >
+              Buy
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant="outlined"
+              color="primary"
+              fullWidth
+              onClick={onReturnChange}
+              disabled={insertedMoney === 0}
+            >
+              Reset
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Button
-            variant="outlined"
-            color="primary"
-            fullWidth
-            onClick={onReturnChange}
-            disabled={insertedMoney === 0}
-          >
-            Reset
-          </Button>
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 };
