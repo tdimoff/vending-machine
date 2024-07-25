@@ -15,7 +15,10 @@ const QuantityControl = ({
 }: QuantityControlProps) => {
   return (
     <Box display="flex" alignItems="center" mt={1}>
-      <IconButton onClick={() => onQuantityChange(-1)} disabled={selectedQuantity <= 1}>
+      <IconButton
+        onClick={() => onQuantityChange(-1)}
+        disabled={selectedQuantity <= 1}
+      >
         <RemoveIcon />
       </IconButton>
       <Typography variant="body1" mx={2}>

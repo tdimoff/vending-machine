@@ -1,11 +1,11 @@
 import { Container } from "@mui/material";
-import "./App.css";
+import styles from "./App.module.scss";
 import VendingMachine from "./components/VendingMachine";
 
 function App() {
   return (
-    <div className="App">
-      <Container maxWidth="lg" sx={{mb: 6}}>
+    <div className={styles.app}>
+      <Container maxWidth="lg" className={styles.container}>
         <VendingMachine />
       </Container>
     </div>

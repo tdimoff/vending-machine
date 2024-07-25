@@ -8,4 +8,4 @@ export const denominations = [
 ];
 
 export const PRODUCT_API_URL =
-  "https://gist.githubusercontent.com/tdimoff/6e94de57dce160cb9c86abc294f466f8/raw/d8e2055101b1098f9194f67de84a69dbbca057f1/products.json";
+  "https://gist.githubusercontent.com/tdimoff/6e94de57dce160cb9c86abc294f466f8/raw/80509278d258c53d9f13ad2ff3f836746580a85e/products.json";

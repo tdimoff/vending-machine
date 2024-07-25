@@ -9,7 +9,7 @@ const CurrencyControls = ({ onInsertMoney }: CurrencyControlsProps) => (
   <Box mt={2}>
     <Grid container spacing={1}>
       {denominations.map((denom) => (
-        <Grid item xs={4} key={denom.value}>
+        <Grid item xs={6} md={6} key={denom.value}>
           <Button
             variant="outlined"
             fullWidth

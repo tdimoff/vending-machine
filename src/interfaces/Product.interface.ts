@@ -4,7 +4,6 @@ export interface IProduct {
   price: number;
   url: string;
   stockQuantity: number;
-  selectedQuantity: number;
 }
 
 export interface ISelectedProduct {
