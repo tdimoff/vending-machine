@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://tdimoff.github.io/vending-machine/static/css/main.06be30f0.css",
-    "main.js": "https://tdimoff.github.io/vending-machine/static/js/main.0285d659.js",
+    "main.js": "https://tdimoff.github.io/vending-machine/static/js/main.c2d24d57.js",
     "static/js/453.609a7a22.chunk.js": "https://tdimoff.github.io/vending-machine/static/js/453.609a7a22.chunk.js",
     "index.html": "https://tdimoff.github.io/vending-machine/index.html",
     "main.06be30f0.css.map": "https://tdimoff.github.io/vending-machine/static/css/main.06be30f0.css.map",
-    "main.0285d659.js.map": "https://tdimoff.github.io/vending-machine/static/js/main.0285d659.js.map",
+    "main.c2d24d57.js.map": "https://tdimoff.github.io/vending-machine/static/js/main.c2d24d57.js.map",
     "453.609a7a22.chunk.js.map": "https://tdimoff.github.io/vending-machine/static/js/453.609a7a22.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.06be30f0.css",
-    "static/js/main.0285d659.js"
+    "static/js/main.c2d24d57.js"
   ]
 }
