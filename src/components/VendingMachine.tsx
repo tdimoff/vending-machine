@@ -1,42 +1,49 @@
 import { useEffect, useState } from "react";
 import VendingControls from "./VendingControls";
 import ProductList from "./ProductList";
-import { IProduct } from "../interfaces/Product.type";
+import { IProduct, ISelectedProduct } from "../interfaces/Product.interface";
 import { Grid, Paper, Typography, Box } from "@mui/material";
+import { PRODUCT_API_URL } from "../config";
 
 const VendingMachine = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [insertedMoney, setInsertedMoney] = useState(0);
-  const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<ISelectedProduct[]>([]);
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(
-          "https://gist.githubusercontent.com/tdimoff/6e94de57dce160cb9c86abc294f466f8/raw/products.json"
+        const productData = await fetch(PRODUCT_API_URL).then((response) =>
+          response.json()
         );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setProducts(data);
+
+        setProducts(productData);
       } catch (error) {
         console.error("Error fetching products:", error);
-        setMessage("Error fetching products. Please try again later.");
       }
     };
 
     fetchProducts();
   }, []);
 
-  const handleProductSelect = (product: IProduct) => {
+  const handleProductSelect = (product: IProduct, quantity: number) => {
     setSelectedProducts((prev) => {
-      const existingProduct = prev.find((p) => p.id === product.id);
+      const existingProductIndex = prev.findIndex((p) => p.product.id === product.id);
 
-      return existingProduct
-        ? prev.filter((p) => p.id !== product.id)
-        : [...prev, product];
+      if (existingProductIndex !== -1) {
+        if (quantity === 0) {
+          return prev.filter((p) => p.product.id !== product.id);
+        } else {
+          const updatedProducts = [...prev];
+
+          updatedProducts[existingProductIndex] = { product, quantity };
+
+          return updatedProducts;
+        }
+      } else {
+        return quantity > 0 ? [...prev, { product, quantity }] : prev;
+      }
     });
   };
 
@@ -44,36 +51,47 @@ const VendingMachine = () => {
     setInsertedMoney((prev) => prev + amount);
   };
 
+  const formatPurchaseString = ({ product, quantity }: ISelectedProduct) => {
+    return quantity > 1 ? `${product.name} (${quantity}x)` : product.name;
+  };
+
   const handlePurchase = () => {
     const totalPrice = selectedProducts.reduce(
-      (sum, product) => sum + product.price,
-      0
-    );
+      (sum, { product, quantity }) => sum + product.price * quantity, 0);
+
     if (selectedProducts.length > 0 && insertedMoney >= totalPrice) {
       setProducts((prevProducts) =>
-        prevProducts.map((p) =>
-          selectedProducts.some((sp) => sp.id === p.id)
-            ? { ...p, quantity: p.quantity - 1 }
-            : p
-        )
+        prevProducts.map((p) => {
+          const selectedProduct = selectedProducts.find(
+            (sp) => sp.product.id === p.id
+          );
+
+          return selectedProduct
+            ? {...p, stockQuantity: p.stockQuantity - selectedProduct.quantity }
+            : p;
+        })
       );
       const change = insertedMoney - totalPrice;
 
       setInsertedMoney(0);
+
       if (change > 0) {
         setMessage(
-          `Thank you for buying ${selectedProducts
-            .map((p) => p.name)
-            .join(", ")}! Returning $${change.toFixed(2)}`
+          `Thank you for purchasing ${selectedProducts
+            .map(formatPurchaseString)
+            .join(", ")}!
+          Returning: $${change.toFixed(2)}`
         );
       } else {
         setMessage(
-          `You bought ${selectedProducts.map((p) => p.name).join(", ")}!`
+          `You've purchased ${selectedProducts
+            .map(formatPurchaseString)
+            .join(", ")}!`
         );
       }
       setSelectedProducts([]);
     } else {
-      setMessage("Not enough money or no products selected!");
+      setMessage("Insufficient funds or no products selected.");
     }
   };
 
@@ -81,21 +99,19 @@ const VendingMachine = () => {
     if (insertedMoney > 0) {
       setMessage(`Returning $${insertedMoney.toFixed(2)}`);
       setInsertedMoney(0);
-    } else {
-      setMessage("No money to return.");
     }
+
+    setSelectedProducts([]);
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} mt={6}>
       <Grid item xs={12} md={8}>
-        <Paper elevation={3}>
-          <ProductList
-            products={products}
-            onSelect={handleProductSelect}
-            selectedProducts={selectedProducts}
-          />
-        </Paper>
+        <ProductList
+          products={products}
+          onSelect={handleProductSelect}
+          selectedProducts={selectedProducts}
+        />
       </Grid>
       <Grid item xs={12} md={4}>
         <Paper elevation={3}>
@@ -106,7 +122,7 @@ const VendingMachine = () => {
             onReturnChange={handleReturnChange}
             selectedProducts={selectedProducts}
           />
-          <Box sx={{ mt: 2, p: 2 }}>
+          <Box mt={2} p={2}>
             <Typography variant="body1" color="text.secondary">
               {message}
             </Typography>

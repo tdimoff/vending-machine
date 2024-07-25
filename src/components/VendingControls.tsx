@@ -1,10 +1,10 @@
 import { Box, Typography, Button, Grid } from "@mui/material";
-import { IProduct } from "../interfaces/Product.type";
+import { ISelectedProduct } from "../interfaces/Product.interface";
 import CurrencyControls from "./CurrencyControls";
 
 interface VendingControlProps {
   insertedMoney: number;
-  selectedProducts: IProduct[];
+  selectedProducts: ISelectedProduct[];
   onInsertMoney: (amount: number) => void;
   onPurchase: () => void;
   onReturnChange: () => void;
@@ -17,30 +17,33 @@ const VendingControls = ({
   onPurchase,
   onReturnChange,
 }: VendingControlProps) => {
-  const totalPrice = selectedProducts.reduce((sum, product) => sum + product.price, 0);
+  const totalPrice = selectedProducts.reduce(
+    (sum, { product, quantity }) => sum + product.price * quantity,
+    0
+  );
 
   return (
-    <Box>
+    <Box p={3}>
       <Typography variant="h4" gutterBottom>
         Balance: ${insertedMoney.toFixed(2)}
       </Typography>
       {selectedProducts.length > 0 && (
-        <Box>
+        <Box mb={2}>
           <Typography variant="h5" gutterBottom>
             Selected Items:
           </Typography>
-          {selectedProducts.map((product) => (
-            <Typography key={product.id} variant="body2">
-              {product.name} - ${product.price.toFixed(2)}
+          {selectedProducts.map(({ product, quantity }) => (
+            <Typography key={product.id} variant="body1">
+              {product.name} (x{quantity}) - ${(product.price * quantity).toFixed(2)}
             </Typography>
           ))}
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Total Price: ${totalPrice.toFixed(2)}
           </Typography>
         </Box>
       )}
       {insertedMoney === 0.00 && (
-        <Typography variant="h4">Please insert coins/bills:</Typography>
+        <Typography variant="h4" gutterBottom>Please insert money:</Typography>
       )}
       <CurrencyControls onInsertMoney={onInsertMoney} />
       <Grid container spacing={2} sx={{ mt: 2 }}>
@@ -50,9 +53,7 @@ const VendingControls = ({
             color="secondary"
             fullWidth
             onClick={onPurchase}
-            disabled={
-              selectedProducts.length === 0 || insertedMoney < totalPrice
-            }
+            disabled={selectedProducts.length === 0 || insertedMoney < totalPrice}
           >
             Buy
           </Button>

@@ -1,14 +1,13 @@
-import { Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import "./App.css";
 import VendingMachine from "./components/VendingMachine";
 
 function App() {
   return (
     <div className="App">
-      <Typography variant="h2" component="h1">
-        Please select an item:
-      </Typography>
-      <VendingMachine />
+      <Container maxWidth="lg" sx={{mb: 6}}>
+        <VendingMachine />
+      </Container>
     </div>
   );
 }

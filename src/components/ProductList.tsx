@@ -1,27 +1,37 @@
 import ProductItem from "./ProductItem";
-import { IProduct } from "../interfaces/Product.type";
+import { IProduct } from "../interfaces/Product.interface";
 import { Grid } from "@mui/material";
+
+interface SelectedProduct {
+  product: IProduct;
+  quantity: number;
+}
 
 interface ProductListProps {
   products: IProduct[];
-  selectedProducts: IProduct[];
-  onSelect: (product: IProduct) => void;
+  selectedProducts: SelectedProduct[];
+  onSelect: (product: IProduct, quantity: number) => void;
 }
 
-const ProductList = ({ products, selectedProducts, onSelect }: ProductListProps) => {
-    console.log(products)
-  return (
-    <Grid container spacing={2}>
-      {products.map((product) => (
+const ProductList = ({
+  products,
+  selectedProducts,
+  onSelect,
+}: ProductListProps) => (
+  <Grid container spacing={2}>
+    {products.map((product) => {
+      const selectedProduct = selectedProducts.find((p) => p.product.id === product.id);
+      return (
         <ProductItem
-          product={product} 
-          key={product.id} 
+          product={product}
+          key={product.id}
           onSelect={onSelect}
-          isSelected={selectedProducts.some(p => p.id === product.id)}
+          isSelected={!!selectedProduct}
+          selectedQuantity={selectedProduct?.quantity || 0}
         />
-      ))}
-    </Grid>
-  );
-};
+      );
+    })}
+  </Grid>
+);
 
 export default ProductList;

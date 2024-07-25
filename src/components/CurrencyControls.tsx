@@ -1,21 +1,13 @@
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Box } from "@mui/material";
+import { denominations } from "../config";
 
 interface CurrencyControlsProps {
   onInsertMoney: (amount: number) => void;
 }
 
-const CurrencyControls = ({ onInsertMoney }: CurrencyControlsProps) => {
-  const denominations = [
-    { value: 0.05, label: "$0.05" },
-    { value: 0.1, label: "$0.10" },
-    { value: 0.25, label: "$0.25" },
-    { value: 1, label: "$1" },
-    { value: 5, label: "$5" },
-    { value: 10, label: "$10" },
-  ];
-
-  return (
-    <Grid container spacing={1} sx={{ mt: 2 }}>
+const CurrencyControls = ({ onInsertMoney }: CurrencyControlsProps) => (
+  <Box mt={2}>
+    <Grid container spacing={1}>
       {denominations.map((denom) => (
         <Grid item xs={4} key={denom.value}>
           <Button
@@ -28,7 +20,7 @@ const CurrencyControls = ({ onInsertMoney }: CurrencyControlsProps) => {
         </Grid>
       ))}
     </Grid>
-  );
-};
+  </Box>
+);
 
 export default CurrencyControls;
