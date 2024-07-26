@@ -48,7 +48,7 @@ const ProductItem = ({
             <CardMedia
               component="img"
               className={styles.productItem__media}
-              src={`${process.env.REACT_APP_API_URL}/${product.url}`}
+              src={`${process.env.PUBLIC_URL}/${product.url}`}
               alt={product.name}
             />
           </Box>
