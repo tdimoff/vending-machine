@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://tdimoff.github.io/vending-machine/static/css/main.68141221.css",
-    "main.js": "https://tdimoff.github.io/vending-machine/static/js/main.480edc2d.js",
+    "main.css": "https://tdimoff.github.io/vending-machine/static/css/main.11d23792.css",
+    "main.js": "https://tdimoff.github.io/vending-machine/static/js/main.a1c92250.js",
     "static/js/453.609a7a22.chunk.js": "https://tdimoff.github.io/vending-machine/static/js/453.609a7a22.chunk.js",
     "index.html": "https://tdimoff.github.io/vending-machine/index.html",
-    "main.68141221.css.map": "https://tdimoff.github.io/vending-machine/static/css/main.68141221.css.map",
-    "main.480edc2d.js.map": "https://tdimoff.github.io/vending-machine/static/js/main.480edc2d.js.map",
+    "main.11d23792.css.map": "https://tdimoff.github.io/vending-machine/static/css/main.11d23792.css.map",
+    "main.a1c92250.js.map": "https://tdimoff.github.io/vending-machine/static/js/main.a1c92250.js.map",
     "453.609a7a22.chunk.js.map": "https://tdimoff.github.io/vending-machine/static/js/453.609a7a22.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.68141221.css",
-    "static/js/main.480edc2d.js"
+    "static/css/main.11d23792.css",
+    "static/js/main.a1c92250.js"
   ]
 }
