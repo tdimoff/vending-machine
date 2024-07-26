@@ -57,14 +57,12 @@ const ProductItem = ({
               gutterBottom
               variant="h5"
               component="div"
-              className={styles.productItem__name}
             >
               {product.name}
             </Typography>
             <Typography
               variant="h6"
               color="text.primary"
-              className={styles.productItem__price}
             >
               ${product.price.toFixed(2)}
             </Typography>
@@ -73,7 +71,9 @@ const ProductItem = ({
               color="text.secondary"
               className={styles.productItem__stock}
             >
-              In stock: {product.stockQuantity}
+              {product.stockQuantity > 0
+                ? `In stock: ${product.stockQuantity}`
+                : "Out of stock"}
             </Typography>
           </CardContent>
           <CardActions className={styles.productItem__actions}>
