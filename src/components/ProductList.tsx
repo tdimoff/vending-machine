@@ -20,8 +20,7 @@ const ProductList = ({
 }: ProductListProps) => (
   <Grid container spacing={2}>
     {products.map((product) => {
-      const selectedProduct = selectedProducts
-        .find(selected => selected.product.id === product.id);
+      const selectedProduct = selectedProducts.find(sel => sel.product.id === product.id);
 
       return (
         <ProductItem
